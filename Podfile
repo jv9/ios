@@ -4,4 +4,5 @@ use_frameworks!
 target 'classmereApp' do
 pod 'Alamofire'
 pod 'SwiftyJSON'
+pod 'pop'
 end

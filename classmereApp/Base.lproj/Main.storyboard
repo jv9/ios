@@ -117,7 +117,6 @@
                                             <outlet property="buildingLabel" destination="wIy-BB-0YX" id="EuB-pR-7is"/>
                                             <outlet property="timeLabel" destination="iew-yD-plg" id="mws-NM-2X0"/>
                                             <outlet property="titleLabel" destination="i8i-k3-Whd" id="Fw1-qt-5m0"/>
-                                            <segue destination="mKI-Gp-tRr" kind="showDetail" identifier="showDetail" id="fRm-IV-oKc"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -256,14 +255,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TGD-i3-mSn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1235.5" y="-630"/>
-        </scene>
-        <!--Detail-->
-        <scene sceneID="2kB-9h-pHQ">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Detail" id="mKI-Gp-tRr" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ak4-ns-XXB" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="709" y="-163"/>
         </scene>
     </scenes>
     <resources>

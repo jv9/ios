@@ -67,7 +67,7 @@ class TodayTableViewController: UIViewController, UITableViewDelegate, UITableVi
         }
     }
 
-    // MARK: - Table View
+    // MARK: - Table View Data Source
 
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return todayViewModel.courses.count
@@ -106,5 +106,14 @@ class TodayTableViewController: UIViewController, UITableViewDelegate, UITableVi
             cell.contentView.backgroundColor = cellColors[indexPath.section]
             return cell
     }
-
+    
+    // MARK: - Table View Delegate
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if let cell = tableView.cellForRowAtIndexPath(indexPath) as? AbstractClassmereCell {
+            cell.toggleExpansion()
+        }
+        
+    }
+    
 }
