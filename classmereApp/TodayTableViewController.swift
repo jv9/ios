@@ -14,8 +14,9 @@ class TodayTableViewController: UIViewController, UITableViewDelegate, UITableVi
 
     let todayViewModel = TodayViewModel()
     var detailViewController: DetailViewController? = nil
+    var selectedCellIndex: NSIndexPath?
     let cellColors = [
-        UIColor(hue:0.02, saturation:0.64, brightness:0.95, alpha:1),
+        UIColor(hue:0.00, saturation:0.00, brightness:0.95, alpha:1),
         UIColor(hue:0.51, saturation:0.81, brightness:0.91, alpha:1),
         UIColor(hue:0.45, saturation:0.89, brightness:0.84, alpha:1)]
 
@@ -23,7 +24,7 @@ class TodayTableViewController: UIViewController, UITableViewDelegate, UITableVi
         super.viewDidLoad()
         
         // Fetch courses
-        todayViewModel.fetchCourseData([("PAC", 296), ("ECE", 271), ("Z", 477)]) {
+        todayViewModel.fetchCourseData([("ECE", 271)]) {
             self.tableView.reloadData()
 
             let sections  = self.todayViewModel.courses.map({ course in
@@ -74,16 +75,6 @@ class TodayTableViewController: UIViewController, UITableViewDelegate, UITableVi
     }
 
     func tableView(tableView: UITableView,
-        heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-            return 122
-    }
-
-    func tableView(tableView: UITableView,
-        heightForHeaderInSection section: Int) -> CGFloat {
-            return 32
-    }
-
-    func tableView(tableView: UITableView,
         numberOfRowsInSection section: Int) -> Int {
             return 1
     }
@@ -103,17 +94,36 @@ class TodayTableViewController: UIViewController, UITableViewDelegate, UITableVi
             }
             let course = todayViewModel.courses[indexPath.section]
             cell.populateWithCourse(course)
-            cell.contentView.backgroundColor = cellColors[indexPath.section]
+            cell.contentView.backgroundColor = UIColor.clearColor()
+            cell.backgroundColor = UIColor.clearColor()
             return cell
     }
     
     // MARK: - Table View Delegate
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        selectedCellIndex = indexPath
+//        selectedCellIndex = selectedCellIndex == indexPath ? nil : indexPath
         if let cell = tableView.cellForRowAtIndexPath(indexPath) as? AbstractClassmereCell {
             cell.toggleExpansion()
+            tableView.beginUpdates()
+            tableView.endUpdates()
         }
-        
     }
     
+    func tableView(tableView: UITableView,
+        heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+            let cellHeight: CGFloat = 122.0
+            if indexPath == selectedCellIndex {
+                return cellHeight * 3.0
+            } else {
+                return cellHeight
+            }
+    }
+    
+    func tableView(tableView: UITableView,
+        heightForHeaderInSection section: Int) -> CGFloat {
+            
+            return 32
+    }
 }

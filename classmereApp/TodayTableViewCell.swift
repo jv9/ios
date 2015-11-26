@@ -10,9 +10,22 @@ import UIKit
 
 class TodayTableViewCell: AbstractClassmereCell {
 
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var buildingLabel: UILabel!
-    @IBOutlet weak var timeLabel: UILabel!
+    let titleLabel = UILabel()
+    let buildingLabel = UILabel()
+    let timeLabel = UILabel()
+    
+    override func awakeFromNib() {
+        titleLabel.constraints
+        super.awakeFromNib()
+        
+        contentView.addSubview(titleLabel)
+        
+        let margins = layoutMarginsGuide
+        
+        titleLabel.topAnchor.constraintEqualToAnchor(margins.topAnchor).active = true
+        titleLabel.leadingAnchor.constraintEqualToAnchor(margins.leadingAnchor).active = true
+        titleLabel.trailingAnchor.constraintEqualToAnchor(margins.trailingAnchor).active = true
+    }
 
     func populateWithCourse(course: Course) {
         let section = course.courseSections[0]

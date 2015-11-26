@@ -10,7 +10,7 @@ import UIKit
 import pop
 import Darwin
 
-private enum CellState {
+enum CellState {
     case Open
     case Closed
     case Opening
@@ -20,30 +20,73 @@ private enum CellState {
 class AbstractClassmereCell: UITableViewCell {
     
     let aboveView = UIView()
+    let middleView = UIView()
     let belowView = UIView()
     
-    private var cellState: CellState = .Closed
+    var cellState: CellState = .Closed
+    
+    // MARK: - Initialization
+    
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
     
     override func awakeFromNib() {
-        layer.cornerRadius = 4.0
-        layer.masksToBounds = true
-        backgroundColor = UIColor.clearColor()
         selectionStyle = .None
+        let origin = CGPoint(x: 0.0, y: 0.0)
+        let size = self.frame.size
+        let frame = CGRect(origin: origin, size: size)
         
-        aboveView.frame = self.frame
-        belowView.frame = self.frame
+        middleView.frame = frame
+        middleView.backgroundColor = UIColor.redColor()
+        contentView.insertSubview(middleView, atIndex: 0)
+        
+        aboveView.frame = frame
+        aboveView.layer.anchorPoint = CGPoint(x: 0.5, y: 0.0)
+        aboveView.backgroundColor = UIColor.purpleColor()
+        contentView.insertSubview(aboveView, atIndex: 0)
+        
+        belowView.frame = frame
+        belowView.layer.anchorPoint = CGPoint(x: 0.5, y: 1.0)
+        belowView.backgroundColor = UIColor.yellowColor()
+        contentView.insertSubview(belowView, atIndex: 0)
     }
+    
+    // MARK: - Animation Methods
     
     func toggleExpansion() {
         let flipAnimation = POPSpringAnimation(propertyNamed: kPOPLayerRotationX)
+        let moveAnimation = POPSpringAnimation(propertyNamed: kPOPLayerTranslationY)
+        flipAnimation.springBounciness = 0.0
+        moveAnimation.springBounciness = 0.0
         switch cellState {
         case .Open:
-            flipAnimation.toValue = 0
-            layer.pop_addAnimation(flipAnimation, forKey: "flipUp")
+            flipAnimation.toValue = M_PI / 2.0
+            moveAnimation.toValue = 0.0
+            
+            middleView.layer.pop_addAnimation(moveAnimation, forKey: "middleMoveUp")
+            aboveView.layer.pop_addAnimation(moveAnimation, forKey: "aboveMoveUp")
+            belowView.layer.pop_addAnimation(moveAnimation, forKey: "belowMoveUp")
+            
+            aboveView.layer.pop_addAnimation(flipAnimation, forKey: "aboveFlipDown")
+            belowView.layer.pop_addAnimation(flipAnimation, forKey: "belowFlipUp")
+
             cellState = .Closed
         case .Closed:
             flipAnimation.toValue = M_PI
-            layer.pop_addAnimation(flipAnimation, forKey: "flipUp")
+            moveAnimation.toValue = 122.0
+            
+            middleView.layer.pop_addAnimation(moveAnimation, forKey: "middleMoveDown")
+            aboveView.layer.pop_addAnimation(moveAnimation, forKey: "aboveMoveDown")
+            belowView.layer.pop_addAnimation(moveAnimation, forKey: "middleMoveDown")
+            
+            aboveView.layer.pop_addAnimation(flipAnimation, forKey: "aboveFlipUp")
+            belowView.layer.pop_addAnimation(flipAnimation, forKey: "belowFlipDown")
+            
             cellState = .Open
         case .Opening:
             break
