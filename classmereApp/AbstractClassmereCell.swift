@@ -17,6 +17,11 @@ enum CellState {
 
 class AbstractClassmereCell: UITableViewCell {
     
+    let FLIP_SPRING_BOUNCINESS: CGFloat = 0.0
+    let MOVE_SPRING_BOUNCINESS: CGFloat = 0.0
+    let FLIP_SPRING_VELOCITY: CGFloat = 12.0
+    let MOVE_SPRING_VELOCITY: CGFloat = 12.0
+    
     var aboveView = UIView()
     var middleView = UIView()
     var belowView = UIView()
@@ -34,22 +39,35 @@ class AbstractClassmereCell: UITableViewCell {
     }
     
     override func awakeFromNib() {
-        selectionStyle = .None
-        let origin = CGPoint(x: 0.0, y: 0.0)
-        let size = self.frame.size
-        let frame = CGRect(origin: origin, size: size)
+        super.awakeFromNib()
         
-        middleView.frame = frame
+        selectionStyle = .None
+        
+        let topOrigin = CGPoint(x: 0.0, y: -self.frame.height)
+        let middleOrigin = CGPoint(x: 0.0, y: 0.0)
+        let bottomOrigin = CGPoint(x: 0.0, y: self.frame.height)
+        let size = self.frame.size
+        
+        let topFrame = CGRect(origin: topOrigin, size: size)
+        let middleFrame = CGRect(origin: middleOrigin, size: size)
+        let bottomFrame = CGRect(origin: bottomOrigin, size: size)
+        
+        let topAnchorPoint = CGPoint(x: 0.5, y: 1.0)
+        let bottomAnchorPoint = CGPoint(x: 0.5, y:0.0)
+        
+        middleView.frame = middleFrame
         middleView.backgroundColor = UIColor.redColor()
         contentView.insertSubview(middleView, atIndex: 0)
         
-        aboveView.frame = frame
-        aboveView.layer.anchorPoint = CGPoint(x: 0.5, y: 0.0)
+        aboveView.frame = topFrame
+        aboveView.layer.anchorPoint = topAnchorPoint
+        aboveView.layer.transform = CATransform3DMakeRotation(CGFloat(M_PI / 2.0), 1.0, 0.0, 0.0)
         aboveView.backgroundColor = UIColor.purpleColor()
         contentView.insertSubview(aboveView, atIndex: 0)
         
-        belowView.frame = frame
-        belowView.layer.anchorPoint = CGPoint(x: 0.5, y: 1.0)
+        belowView.frame = bottomFrame
+        belowView.layer.anchorPoint = bottomAnchorPoint
+        belowView.layer.transform = CATransform3DMakeRotation(CGFloat(M_PI / 2.0), 1.0, 0.0, 0.0)
         belowView.backgroundColor = UIColor.yellowColor()
         contentView.insertSubview(belowView, atIndex: 0)
     }
@@ -59,8 +77,11 @@ class AbstractClassmereCell: UITableViewCell {
     func toggleExpansion() {
         let flipAnimation = POPSpringAnimation(propertyNamed: kPOPLayerRotationX)
         let moveAnimation = POPSpringAnimation(propertyNamed: kPOPLayerTranslationY)
-        flipAnimation.springBounciness = 0.0
-        moveAnimation.springBounciness = 0.0
+        flipAnimation.springBounciness = FLIP_SPRING_BOUNCINESS
+        moveAnimation.springBounciness = MOVE_SPRING_BOUNCINESS
+        flipAnimation.velocity = FLIP_SPRING_VELOCITY
+        moveAnimation.velocity = MOVE_SPRING_VELOCITY
+        
         switch cellState {
         case .Open:
             flipAnimation.toValue = M_PI / 2.0
@@ -83,8 +104,8 @@ class AbstractClassmereCell: UITableViewCell {
 
             cellState = .Closed
         case .Closed:
-            flipAnimation.toValue = M_PI
-            moveAnimation.toValue = 122.0
+            flipAnimation.toValue = 0.0
+            moveAnimation.toValue = middleView.frame.height
             
             // Show cell
             aboveView.hidden = false
