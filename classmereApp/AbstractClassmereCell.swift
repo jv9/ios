@@ -61,13 +61,13 @@ class AbstractClassmereCell: UITableViewCell {
         
         aboveView.frame = topFrame
         aboveView.layer.anchorPoint = topAnchorPoint
-        aboveView.layer.transform = CATransform3DMakeRotation(CGFloat(M_PI / 2.0), 1.0, 0.0, 0.0)
+        aboveView.layer.transform = CATransform3DMakeRotation(CGFloat(M_PI), 1.0, 0.0, 0.0)
         aboveView.backgroundColor = UIColor.purpleColor()
         contentView.insertSubview(aboveView, atIndex: 0)
         
         belowView.frame = bottomFrame
         belowView.layer.anchorPoint = bottomAnchorPoint
-        belowView.layer.transform = CATransform3DMakeRotation(CGFloat(M_PI / 2.0), 1.0, 0.0, 0.0)
+        belowView.layer.transform = CATransform3DMakeRotation(CGFloat(M_PI), 1.0, 0.0, 0.0)
         belowView.backgroundColor = UIColor.yellowColor()
         contentView.insertSubview(belowView, atIndex: 0)
     }
