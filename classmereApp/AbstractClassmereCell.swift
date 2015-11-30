@@ -13,15 +13,13 @@ import Darwin
 enum CellState {
     case Open
     case Closed
-    case Opening
-    case Closing
 }
 
 class AbstractClassmereCell: UITableViewCell {
     
-    let aboveView = UIView()
-    let middleView = UIView()
-    let belowView = UIView()
+    var aboveView = UIView()
+    var middleView = UIView()
+    var belowView = UIView()
     
     var cellState: CellState = .Closed
     
@@ -68,10 +66,18 @@ class AbstractClassmereCell: UITableViewCell {
             flipAnimation.toValue = M_PI / 2.0
             moveAnimation.toValue = 0.0
             
+            // Hide cell on completion
+            flipAnimation.completionBlock = { _,_ in
+                self.aboveView.hidden = true
+                self.belowView.hidden = true
+            }
+            
+            // Move animation
             middleView.layer.pop_addAnimation(moveAnimation, forKey: "middleMoveUp")
             aboveView.layer.pop_addAnimation(moveAnimation, forKey: "aboveMoveUp")
             belowView.layer.pop_addAnimation(moveAnimation, forKey: "belowMoveUp")
             
+            // Flip animation
             aboveView.layer.pop_addAnimation(flipAnimation, forKey: "aboveFlipDown")
             belowView.layer.pop_addAnimation(flipAnimation, forKey: "belowFlipUp")
 
@@ -80,18 +86,20 @@ class AbstractClassmereCell: UITableViewCell {
             flipAnimation.toValue = M_PI
             moveAnimation.toValue = 122.0
             
+            // Show cell
+            aboveView.hidden = false
+            belowView.hidden = false
+            
+            // Move animation
             middleView.layer.pop_addAnimation(moveAnimation, forKey: "middleMoveDown")
             aboveView.layer.pop_addAnimation(moveAnimation, forKey: "aboveMoveDown")
             belowView.layer.pop_addAnimation(moveAnimation, forKey: "middleMoveDown")
             
+            // Flip animation
             aboveView.layer.pop_addAnimation(flipAnimation, forKey: "aboveFlipUp")
             belowView.layer.pop_addAnimation(flipAnimation, forKey: "belowFlipDown")
             
             cellState = .Open
-        case .Opening:
-            break
-        case .Closing:
-            break
         }
     }
 }
