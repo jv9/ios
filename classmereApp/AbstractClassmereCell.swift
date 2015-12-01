@@ -43,9 +43,11 @@ class AbstractClassmereCell: UITableViewCell {
         
         selectionStyle = .None
         
+        // Place top, middle, and bottom views
         let topOrigin = CGPoint(x: 0.0, y: -self.frame.height)
         let middleOrigin = CGPoint(x: 0.0, y: 0.0)
         let bottomOrigin = CGPoint(x: 0.0, y: self.frame.height)
+        
         let size = self.frame.size
         
         let topFrame = CGRect(origin: topOrigin, size: size)
@@ -84,11 +86,14 @@ class AbstractClassmereCell: UITableViewCell {
         
         switch cellState {
         case .Open:
+            cellWillContract()
+            
             flipAnimation.toValue = M_PI / 2.0
             moveAnimation.toValue = 0.0
             
             // Hide cell on completion
             flipAnimation.completionBlock = { _,_ in
+                self.cellDidContract()
                 self.aboveView.hidden = true
                 self.belowView.hidden = true
             }
@@ -104,8 +109,14 @@ class AbstractClassmereCell: UITableViewCell {
 
             cellState = .Closed
         case .Closed:
+            cellWillExpand()
+            
             flipAnimation.toValue = 0.0
             moveAnimation.toValue = middleView.frame.height
+            
+            flipAnimation.completionBlock = { _,_ in
+                self.cellDidExpand()
+            }
             
             // Show cell
             aboveView.hidden = false
@@ -123,4 +134,9 @@ class AbstractClassmereCell: UITableViewCell {
             cellState = .Open
         }
     }
+    
+    func cellWillExpand() -> Void {}
+    func cellDidExpand() -> Void {}
+    func cellWillContract() -> Void {}
+    func cellDidContract() -> Void {}
 }
