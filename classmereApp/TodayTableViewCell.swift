@@ -13,13 +13,16 @@ import MapKit
 class TodayTableViewCell: AbstractClassmereCell {
 
     let mapView = MKMapView()
-    let titleLabel = UILabel()
-    let timeLabel = UILabel()
-    let buildingLabel = UILabel()
+    let middleStackView = UIStackView()
+    
+    let titleLabel = ClassmereCellLabel()
+    let timeLabel = ClassmereCellLabel()
+    let buildingLabel = ClassmereCellLabel()
     
     // MARK: - Map variables
     
-    var pinLocation: MKPlacemark?
+    let schoolLatitude = 44.563849
+    let schoolLongitude = -123.279498
     
     let schoolZoomSpan = MKCoordinateSpan(
         latitudeDelta: 0.02,
@@ -28,7 +31,9 @@ class TodayTableViewCell: AbstractClassmereCell {
         latitudeDelta: 0.005,
         longitudeDelta: 0.005)
     
+    var pinLocation: MKPlacemark?
     var buildingAddress: String?
+    
     var completedNavigation = false {
         didSet {
             completedNavigation = true
@@ -43,7 +48,7 @@ class TodayTableViewCell: AbstractClassmereCell {
         layoutMiddleSubviews()
         layoutBottomSubviews()
         
-        formatTopSubViews()
+        styleTopSubViews()
     }
     
     func layoutTopSubviews() {
@@ -61,36 +66,48 @@ class TodayTableViewCell: AbstractClassmereCell {
     
     func layoutMiddleSubviews() {
         let margins = middleView.layoutMarginsGuide
+        middleView.layoutMargins = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
         
-        middleView.addSubview(titleLabel)
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.topAnchor.constraintEqualToAnchor(margins.topAnchor).active = true
-        titleLabel.leadingAnchor.constraintEqualToAnchor(margins.leadingAnchor).active = true
-        titleLabel.trailingAnchor.constraintEqualToAnchor(margins.trailingAnchor).active = true
+        middleView.addSubview(middleStackView)
+        middleStackView.translatesAutoresizingMaskIntoConstraints = false
+        middleStackView.topAnchor.constraintEqualToAnchor(margins.topAnchor).active = true
+        middleStackView.bottomAnchor.constraintEqualToAnchor(margins.bottomAnchor).active = true
+        middleStackView.leadingAnchor.constraintEqualToAnchor(margins.leadingAnchor).active = true
+        middleStackView.trailingAnchor.constraintEqualToAnchor(margins.trailingAnchor).active = true
         
-        middleView.addSubview(timeLabel)
-        timeLabel.translatesAutoresizingMaskIntoConstraints = false
-        timeLabel.topAnchor.constraintGreaterThanOrEqualToAnchor(titleLabel.layoutMarginsGuide.bottomAnchor, constant: 12.0).active = true
-        timeLabel.leadingAnchor.constraintEqualToAnchor(margins.leadingAnchor).active = true
-        timeLabel.trailingAnchor.constraintEqualToAnchor(margins.trailingAnchor).active = true
+        middleStackView.addArrangedSubview(titleLabel)
+        middleStackView.addArrangedSubview(timeLabel)
+        middleStackView.addArrangedSubview(buildingLabel)
         
-        middleView.addSubview(buildingLabel)
-        buildingLabel.translatesAutoresizingMaskIntoConstraints = false
-        buildingLabel.topAnchor.constraintEqualToAnchor(timeLabel.layoutMarginsGuide.bottomAnchor, constant: 12.0).active = true
-        buildingLabel.leadingAnchor.constraintEqualToAnchor(margins.leadingAnchor).active = true
-        buildingLabel.trailingAnchor.constraintEqualToAnchor(margins.trailingAnchor).active = true
+//        middleView.addSubview(titleLabel)
+//        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+//        titleLabel.topAnchor.constraintEqualToAnchor(margins.topAnchor).active = true
+//        titleLabel.leadingAnchor.constraintEqualToAnchor(margins.leadingAnchor).active = true
+//        titleLabel.trailingAnchor.constraintEqualToAnchor(margins.trailingAnchor).active = true
+//        
+//        middleView.addSubview(timeLabel)
+//        timeLabel.translatesAutoresizingMaskIntoConstraints = false
+//        timeLabel.topAnchor.constraintGreaterThanOrEqualToAnchor(titleLabel.layoutMarginsGuide.bottomAnchor, constant: 12.0).active = true
+//        timeLabel.leadingAnchor.constraintEqualToAnchor(margins.leadingAnchor).active = true
+//        timeLabel.trailingAnchor.constraintEqualToAnchor(margins.trailingAnchor).active = true
+//        
+//        middleView.addSubview(buildingLabel)
+//        buildingLabel.translatesAutoresizingMaskIntoConstraints = false
+//        buildingLabel.topAnchor.constraintEqualToAnchor(timeLabel.layoutMarginsGuide.bottomAnchor, constant: 12.0).active = true
+//        buildingLabel.leadingAnchor.constraintEqualToAnchor(margins.leadingAnchor).active = true
+//        buildingLabel.trailingAnchor.constraintEqualToAnchor(margins.trailingAnchor).active = true
     }
     
     func layoutBottomSubviews() {
         
     }
     
-    // MARK: - Format Subviews
+    // MARK: - Style Subviews
     
-    func formatTopSubViews() {
+    func styleTopSubViews() {
         let schoolCoordinates = CLLocationCoordinate2D(
-            latitude: 44.563849,
-            longitude: -123.279498)
+            latitude: schoolLatitude,
+            longitude: schoolLongitude)
         let schoolCoordinateRegion = MKCoordinateRegion(
             center: schoolCoordinates,
             span: schoolZoomSpan)
@@ -100,8 +117,11 @@ class TodayTableViewCell: AbstractClassmereCell {
     func populateWithCourse(course: Course) {
         let section = course.courseSections[0]
         titleLabel.text = course.title?.capitalizedString
+        titleLabel.type = .Title
         timeLabel.text = TodayTableViewCell.formatCourseTime(course)
+        timeLabel.type = .Time
         buildingLabel.text = TodayTableViewCell.formatBuildingStringWithSection(section)
+        buildingLabel.type = .Building
         buildingAddress = section.building?.address
         
         super.awakeFromNib()
