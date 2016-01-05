@@ -21,16 +21,19 @@ enum ClassmereLabelType {
     case Building
     case Days
     case Time
+    case Instructor
     case Type
     case Status
     case Enrollment
     case Fees
     case Restrictions
     
-    static func widgetForType(type: ClassmereLabelType) -> UIView? {
+    static func optionalImageViewForType(type: ClassmereLabelType) -> UIImageView? {
         let image = imageForType(type)
         if let image = image {
-            return UIImageView(image: image)
+            let imageView = UIImageView(image: image)
+            imageView.contentMode = .ScaleAspectFit
+            return imageView
         } else {
             return nil
         }
@@ -63,6 +66,8 @@ enum ClassmereLabelType {
             return UIImage(named: "calendar")
         case .Time:
             return UIImage(named: "clock")
+        case .Instructor:
+            return UIImage(named: "blank_face")
         case .Type:
             return UIImage(named: "network")
         case .Status:
@@ -91,12 +96,13 @@ class ClassmereCellLabel: UIStackView {
     var type: ClassmereLabelType = .Title {
         didSet {
             textLabel.classmereTextStyle = ClassmereLabelType.textStyleForType(type)
-            widgetView = ClassmereLabelType.widgetForType(type) ?? UIView()
+            widgetView = ClassmereLabelType.optionalImageViewForType(type) ?? UIView()
         }
     }
     
-    override func layoutSubviews() {
-        self.addArrangedSubview(textLabel)
-        self.addArrangedSubview(widgetView)
+    override func drawRect(rect: CGRect) {
+//        addArrangedSubview(widgetView)
+        addArrangedSubview(textLabel)
+
     }
 }

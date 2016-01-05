@@ -22,9 +22,9 @@ class AbstractClassmereCell: UITableViewCell {
     let FLIP_SPRING_VELOCITY: CGFloat = 12.0
     let MOVE_SPRING_VELOCITY: CGFloat = 12.0
     
-    var aboveView = UIView()
+    var topView = UIView()
     var middleView = UIView()
-    var belowView = UIView()
+    var bottomView = UIView()
     
     var cellState: CellState = .Closed
     
@@ -61,17 +61,17 @@ class AbstractClassmereCell: UITableViewCell {
         middleView.backgroundColor = UIColor.redColor()
         contentView.insertSubview(middleView, atIndex: 0)
         
-        aboveView.frame = topFrame
-        aboveView.layer.anchorPoint = topAnchorPoint
-        aboveView.layer.transform = CATransform3DMakeRotation(CGFloat(M_PI), 1.0, 0.0, 0.0)
-        aboveView.backgroundColor = UIColor.purpleColor()
-        contentView.insertSubview(aboveView, atIndex: 0)
+        topView.frame = topFrame
+        topView.layer.anchorPoint = topAnchorPoint
+        topView.layer.transform = CATransform3DMakeRotation(CGFloat(M_PI), 1.0, 0.0, 0.0)
+        topView.backgroundColor = UIColor.purpleColor()
+        contentView.insertSubview(topView, atIndex: 0)
         
-        belowView.frame = bottomFrame
-        belowView.layer.anchorPoint = bottomAnchorPoint
-        belowView.layer.transform = CATransform3DMakeRotation(CGFloat(M_PI), 1.0, 0.0, 0.0)
-        belowView.backgroundColor = UIColor.yellowColor()
-        contentView.insertSubview(belowView, atIndex: 0)
+        bottomView.frame = bottomFrame
+        bottomView.layer.anchorPoint = bottomAnchorPoint
+        bottomView.layer.transform = CATransform3DMakeRotation(CGFloat(M_PI), 1.0, 0.0, 0.0)
+        bottomView.backgroundColor = UIColor.yellowColor()
+        contentView.insertSubview(bottomView, atIndex: 0)
     }
     
     // MARK: - Animation Methods
@@ -94,18 +94,18 @@ class AbstractClassmereCell: UITableViewCell {
             // Hide cell on completion
             flipAnimation.completionBlock = { _,_ in
                 self.cellDidContract()
-                self.aboveView.hidden = true
-                self.belowView.hidden = true
+                self.topView.hidden = true
+                self.bottomView.hidden = true
             }
             
             // Move animation
             middleView.layer.pop_addAnimation(moveAnimation, forKey: "middleMoveUp")
-            aboveView.layer.pop_addAnimation(moveAnimation, forKey: "aboveMoveUp")
-            belowView.layer.pop_addAnimation(moveAnimation, forKey: "belowMoveUp")
+            topView.layer.pop_addAnimation(moveAnimation, forKey: "topMoveUp")
+            bottomView.layer.pop_addAnimation(moveAnimation, forKey: "bottomMoveUp")
             
             // Flip animation
-            aboveView.layer.pop_addAnimation(flipAnimation, forKey: "aboveFlipDown")
-            belowView.layer.pop_addAnimation(flipAnimation, forKey: "belowFlipUp")
+            topView.layer.pop_addAnimation(flipAnimation, forKey: "topFlipDown")
+            bottomView.layer.pop_addAnimation(flipAnimation, forKey: "bottomFlipUp")
 
             cellState = .Closed
         case .Closed:
@@ -119,17 +119,17 @@ class AbstractClassmereCell: UITableViewCell {
             }
             
             // Show cell
-            aboveView.hidden = false
-            belowView.hidden = false
+            topView.hidden = false
+            bottomView.hidden = false
             
             // Move animation
             middleView.layer.pop_addAnimation(moveAnimation, forKey: "middleMoveDown")
-            aboveView.layer.pop_addAnimation(moveAnimation, forKey: "aboveMoveDown")
-            belowView.layer.pop_addAnimation(moveAnimation, forKey: "middleMoveDown")
+            topView.layer.pop_addAnimation(moveAnimation, forKey: "topMoveDown")
+            bottomView.layer.pop_addAnimation(moveAnimation, forKey: "middleMoveDown")
             
             // Flip animation
-            aboveView.layer.pop_addAnimation(flipAnimation, forKey: "aboveFlipUp")
-            belowView.layer.pop_addAnimation(flipAnimation, forKey: "belowFlipDown")
+            topView.layer.pop_addAnimation(flipAnimation, forKey: "topFlipUp")
+            bottomView.layer.pop_addAnimation(flipAnimation, forKey: "bottomFlipDown")
             
             cellState = .Open
         }
