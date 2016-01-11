@@ -103,6 +103,7 @@ class ClassmereCellLabel: UIStackView {
     override func drawRect(rect: CGRect) {
 //        addArrangedSubview(widgetView)
         addArrangedSubview(textLabel)
-
+        alignment = .Leading
+        distribution = .FillProportionally
     }
 }
