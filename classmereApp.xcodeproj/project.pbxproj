@@ -24,6 +24,7 @@
 		AC01F3AA1BFDB81B00F6351D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC01F3A91BFDB81B00F6351D /* Images.xcassets */; };
 		AC11EA7D1BEC947E00F367F6 /* DataFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC11EA7C1BEC947E00F367F6 /* DataFormatter.swift */; };
 		AC5E4B4C1BDEFB4800CF8CB6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC5E4B4A1BDEFB4800CF8CB6 /* Main.storyboard */; };
+		AC6B978B1C436E3800E6F665 /* ClassmereCardLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6B978A1C436E3800E6F665 /* ClassmereCardLabel.swift */; };
 		AC74FC581BEA9D6C0069F894 /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC74FC561BEA9D6C0069F894 /* Search.storyboard */; };
 		AC74FC5A1BEA9D8E0069F894 /* Detail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC74FC591BEA9D8E0069F894 /* Detail.storyboard */; };
 		AC74FC5D1BEA9E8E0069F894 /* CourseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC74FC5B1BEA9E8E0069F894 /* CourseViewController.swift */; };
@@ -36,6 +37,9 @@
 		ACBE3DBA1BDB45AA009877DE /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBE3DB61BDB45AA009877DE /* DetailViewController.swift */; };
 		ACBE3DBB1BDB45AA009877DE /* TodayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBE3DB71BDB45AA009877DE /* TodayTableViewCell.swift */; };
 		ACBE3DBC1BDB45AA009877DE /* MapTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBE3DB81BDB45AA009877DE /* MapTableViewCell.swift */; };
+		ACBF65461C4365B80078DF40 /* ClassmereCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBF65451C4365B80078DF40 /* ClassmereCardView.swift */; };
+		ACBF65481C4366720078DF40 /* ClassmereMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBF65471C4366720078DF40 /* ClassmereMapView.swift */; };
+		ACBF654A1C4368480078DF40 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = ACBF65491C4368480078DF40 /* Settings.bundle */; };
 		ACD9485A1BDEBD3D0055A4F5 /* AbstractClassmereCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD948591BDEBD3D0055A4F5 /* AbstractClassmereCell.swift */; };
 		E6C170611BE1C088000E475E /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C170601BE1C088000E475E /* SearchViewController.swift */; };
 		E6C170631BE1C0F0000E475E /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C170621BE1C0F0000E475E /* SearchViewModel.swift */; };
@@ -73,18 +77,22 @@
 		AC01F3A91BFDB81B00F6351D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		AC11EA7C1BEC947E00F367F6 /* DataFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataFormatter.swift; sourceTree = "<group>"; };
 		AC5E4B4B1BDEFB4800CF8CB6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		AC6B978A1C436E3800E6F665 /* ClassmereCardLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassmereCardLabel.swift; sourceTree = "<group>"; };
 		AC74FC571BEA9D6C0069F894 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Search.storyboard; sourceTree = "<group>"; };
 		AC74FC591BEA9D8E0069F894 /* Detail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Detail.storyboard; sourceTree = "<group>"; };
 		AC74FC5B1BEA9E8E0069F894 /* CourseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseViewController.swift; sourceTree = "<group>"; };
 		AC74FC5C1BEA9E8E0069F894 /* SectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionViewController.swift; sourceTree = "<group>"; };
 		AC74FC5F1BEAA3BA0069F894 /* EmbeddedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmbeddedTableViewCell.swift; sourceTree = "<group>"; };
-		ACBE3DAF1BDB3F94009877DE /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		ACBE3DAF1BDB3F94009877DE /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		ACBE3DB11BDB4346009877DE /* Building.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Building.swift; sourceTree = "<group>"; };
 		ACBE3DB31BDB44D7009877DE /* TodayTableViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodayTableViewModel.swift; sourceTree = "<group>"; };
 		ACBE3DB51BDB45AA009877DE /* DetailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		ACBE3DB61BDB45AA009877DE /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		ACBE3DB71BDB45AA009877DE /* TodayTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodayTableViewCell.swift; sourceTree = "<group>"; };
 		ACBE3DB81BDB45AA009877DE /* MapTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapTableViewCell.swift; sourceTree = "<group>"; };
+		ACBF65451C4365B80078DF40 /* ClassmereCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassmereCardView.swift; sourceTree = "<group>"; };
+		ACBF65471C4366720078DF40 /* ClassmereMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassmereMapView.swift; sourceTree = "<group>"; };
+		ACBF65491C4368480078DF40 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		ACD948591BDEBD3D0055A4F5 /* AbstractClassmereCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbstractClassmereCell.swift; sourceTree = "<group>"; };
 		E6C170601BE1C088000E475E /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		E6C170621BE1C0F0000E475E /* SearchViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
@@ -135,6 +143,7 @@
 		1604B16A1B8D5459003A1E8E /* classmereApp */ = {
 			isa = PBXGroup;
 			children = (
+				ACBF65491C4368480078DF40 /* Settings.bundle */,
 				16AADEAC1B8D993900BA3BE7 /* Models */,
 				16AADEAD1B8D993E00BA3BE7 /* Views */,
 				16AADEAE1B8D994300BA3BE7 /* Controllers */,
@@ -194,6 +203,9 @@
 				16ABAAA41BF80182003CEB31 /* InfoTableViewCell2.swift */,
 				ACBE3DB81BDB45AA009877DE /* MapTableViewCell.swift */,
 				1681F4641BF83D45009532EF /* MapTableViewCell1.swift */,
+				ACBF65451C4365B80078DF40 /* ClassmereCardView.swift */,
+				ACBF65471C4366720078DF40 /* ClassmereMapView.swift */,
+				AC6B978A1C436E3800E6F665 /* ClassmereCardLabel.swift */,
 				AC5E4B4A1BDEFB4800CF8CB6 /* Main.storyboard */,
 				AC74FC591BEA9D8E0069F894 /* Detail.storyboard */,
 				AC74FC561BEA9D6C0069F894 /* Search.storyboard */,
@@ -327,6 +339,7 @@
 				AC5E4B4C1BDEFB4800CF8CB6 /* Main.storyboard in Resources */,
 				AC74FC581BEA9D6C0069F894 /* Search.storyboard in Resources */,
 				AC74FC5A1BEA9D8E0069F894 /* Detail.storyboard in Resources */,
+				ACBF654A1C4368480078DF40 /* Settings.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -397,6 +410,8 @@
 				16AADEB01B8D99ED00BA3BE7 /* Course.swift in Sources */,
 				ACBE3DBC1BDB45AA009877DE /* MapTableViewCell.swift in Sources */,
 				1681F4651BF83D45009532EF /* MapTableViewCell1.swift in Sources */,
+				AC6B978B1C436E3800E6F665 /* ClassmereCardLabel.swift in Sources */,
+				ACBF65461C4365B80078DF40 /* ClassmereCardView.swift in Sources */,
 				ACBE3DB21BDB4346009877DE /* Building.swift in Sources */,
 				AC74FC5E1BEA9E8E0069F894 /* SectionViewController.swift in Sources */,
 				ACBE3DBB1BDB45AA009877DE /* TodayTableViewCell.swift in Sources */,
@@ -414,6 +429,7 @@
 				ACBE3DB91BDB45AA009877DE /* DetailViewModel.swift in Sources */,
 				AC74FC601BEAA3BA0069F894 /* EmbeddedTableViewCell.swift in Sources */,
 				AC11EA7D1BEC947E00F367F6 /* DataFormatter.swift in Sources */,
+				ACBF65481C4366720078DF40 /* ClassmereMapView.swift in Sources */,
 				1627EE041B93A08C007ED748 /* CourseSection.swift in Sources */,
 				ACBE3DBA1BDB45AA009877DE /* DetailViewController.swift in Sources */,
 			);
@@ -556,6 +572,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = classmereApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.classmere.$(PRODUCT_NAME:rfc1034identifier)";
@@ -573,6 +590,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = classmereApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_DYLIB_INSTALL_NAME = "@executable_path/../Frameworks/$(EXECUTABLE_PATH)";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.classmere.$(PRODUCT_NAME:rfc1034identifier)";

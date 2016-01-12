@@ -40,6 +40,21 @@ class TodayTableViewController: UIViewController, UITableViewDelegate, UITableVi
             let navigationController = controllers[controllers.count-1] as! UINavigationController
             self.detailViewController = navigationController.topViewController as? DetailViewController
         }
+        
+        // TODO: REMOVE AFTER TESTING
+        let backingView = UIView(frame: UIScreen.mainScreen().bounds)
+        backingView.backgroundColor = UIColor.whiteColor()
+        view.addSubview(backingView)
+        
+        let testView = UIStackView(frame: UIScreen.mainScreen().bounds)
+        backingView.addSubview(testView)
+        let image = UIImage(named: "building")
+        let labelView = ClassmereCardLabel(
+            icon: image,
+            text: "Kearney 206",
+            style: .Heading)
+        testView.addArrangedSubview(labelView)
+        print(labelView.frame)
     }
     
     override func viewDidAppear(animated: Bool) {
