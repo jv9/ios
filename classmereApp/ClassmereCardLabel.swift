@@ -26,7 +26,7 @@ final class ClassmereCardLabel: UIStackView {
     
     private let iconView = UIImageView()
     private let label = UILabel()
-    private var textStyle: ClassmereLabelTextStyle
+    private var textStyle = ClassmereLabelTextStyle.Body
     
     convenience init(icon: UIImage? = nil, text: String, style: ClassmereLabelTextStyle) {
         self.init(arrangedSubviews: [])
@@ -38,17 +38,14 @@ final class ClassmereCardLabel: UIStackView {
     }
     
     required init?(coder aDecoder: NSCoder) {
-        textStyle = .Body
         super.init(coder: aDecoder)
     }
     
     override init(frame: CGRect) {
-        textStyle = .Body
         super.init(frame: frame)
     }
     
     override init(arrangedSubviews views: [UIView]) {
-        textStyle = .Body
         super.init(arrangedSubviews: views)
         axis = .Horizontal
         alignment = .FirstBaseline

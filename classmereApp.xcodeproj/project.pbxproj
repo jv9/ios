@@ -302,6 +302,11 @@
 					1604B1671B8D5459003A1E8E = {
 						CreatedOnToolsVersion = 6.4;
 						DevelopmentTeam = UT5Q6YJJZX;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					1604B17C1B8D5459003A1E8E = {
 						CreatedOnToolsVersion = 6.4;

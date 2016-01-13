@@ -9,12 +9,23 @@
 import UIKit
 import Mapbox
 
-class ClassmereMapView: UIView {
-    private var internalMapView = UIView()
+final class ClassmereMapView: UIView {
+    private let internalMapView = MGLMapView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = UIColor.greenColor()
+        internalMapView.backgroundColor = UIColor.greenColor()
+        translatesAutoresizingMaskIntoConstraints = false
+        internalMapView.frame = bounds
+        internalMapView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+        
+        let locationCoordinate = CLLocationCoordinate2D(latitude: 44.56,
+            longitude: -123.27)
+        internalMapView.setCenterCoordinate(locationCoordinate,
+            zoomLevel: 15,
+            animated: false)
+        
+        addSubview(internalMapView)
     }
 
     required init?(coder aDecoder: NSCoder) {

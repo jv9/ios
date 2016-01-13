@@ -17,27 +17,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 
     func application(application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-            // Split view
-            guard let splitViewController = self.window!
-                .rootViewController as? UISplitViewController else {
-                    fatalError("No SplitVC found during app initialization")
-            }
-            guard let navigationController = splitViewController.viewControllers
-                .last as? UINavigationController else {
-                    fatalError("No NavigationController found during app initialization")
-            }
-            navigationController.topViewController?.navigationItem
-                .leftBarButtonItem = splitViewController.displayModeButtonItem()
-            splitViewController.delegate = self
+
+            let viewController = TodayTableViewController()
+            let navigationController = UINavigationController(rootViewController: viewController)
+            viewController.view.backgroundColor = UIColor.purpleColor()
+            
+            window = UIWindow(frame: UIScreen.mainScreen().bounds)
+            window?.rootViewController = navigationController
+            window?.makeKeyAndVisible()
+
             return true
     }
-
-    // MARK: - Split view
-
-    func splitViewController(splitViewController: UISplitViewController,
-        collapseSecondaryViewController secondaryViewController: UIViewController,
-        ontoPrimaryViewController primaryViewController: UIViewController) -> Bool {
-            return false
-    }
-
 }

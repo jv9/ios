@@ -10,14 +10,11 @@ import UIKit
 
 class TodayTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    @IBOutlet var tableView: UITableView!
+    let tableView = UITableView()
+    let testView = UIStackView()
 
     let todayViewModel = TodayViewModel()
     var detailViewController: DetailViewController? = nil
-    let cellColors = [
-        UIColor(hue:0.02, saturation:0.64, brightness:0.95, alpha:1),
-        UIColor(hue:0.51, saturation:0.81, brightness:0.91, alpha:1),
-        UIColor(hue:0.45, saturation:0.89, brightness:0.84, alpha:1)]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,28 +30,34 @@ class TodayTableViewController: UIViewController, UITableViewDelegate, UITableVi
                 self.tableView.reloadData()
             }
         }
-
-        // Split view controller
-        if let split = self.splitViewController {
-            let controllers = split.viewControllers
-            let navigationController = controllers[controllers.count-1] as! UINavigationController
-            self.detailViewController = navigationController.topViewController as? DetailViewController
-        }
         
         // TODO: REMOVE AFTER TESTING
-        let backingView = UIView(frame: UIScreen.mainScreen().bounds)
-        backingView.backgroundColor = UIColor.whiteColor()
-        view.addSubview(backingView)
+        testView.frame = view.frame
+        view.addSubview(testView)
         
-        let testView = UIStackView(frame: UIScreen.mainScreen().bounds)
-        backingView.addSubview(testView)
         let image = UIImage(named: "building")
         let labelView = ClassmereCardLabel(
             icon: image,
             text: "Kearney 206",
             style: .Heading)
-        testView.addArrangedSubview(labelView)
-        print(labelView.frame)
+        let labelView2 = ClassmereCardLabel(
+            icon: image,
+            text: "Another Building 69",
+            style: .Body)
+        
+        let cardView = ClassmereCardView(withMap: true, labels: [labelView, labelView2])
+        cardView.backgroundColor = UIColor.whiteColor()
+        testView.addArrangedSubview(cardView)
+        
+        cardView.translatesAutoresizingMaskIntoConstraints = false
+        
+        let margins = testView.layoutMarginsGuide
+        cardView.topAnchor.constraintEqualToAnchor(margins.topAnchor)
+        cardView.rightAnchor.constraintEqualToAnchor(margins.rightAnchor)
+        cardView.bottomAnchor.constraintEqualToAnchor(margins.bottomAnchor)
+        cardView.leftAnchor.constraintEqualToAnchor(margins.leftAnchor)
+        
+        print(cardView.frame)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -118,7 +121,6 @@ class TodayTableViewController: UIViewController, UITableViewDelegate, UITableVi
             }
             let course = todayViewModel.courses[indexPath.section]
             cell.populateWithCourse(course)
-            cell.contentView.backgroundColor = cellColors[indexPath.section]
             return cell
     }
 
