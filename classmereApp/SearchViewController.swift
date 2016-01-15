@@ -1,11 +1,3 @@
-//
-//  SearchViewController.swift
-//  classmereApp
-//
-//  Created by Nawwaf Almutairi on 10/28/15.
-//  Copyright © 2015 Brandon Lee. All rights reserved.
-//
-
 import UIKit
 
 class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {

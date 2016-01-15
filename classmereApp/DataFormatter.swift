@@ -1,11 +1,3 @@
-//
-//  DataFormatter.swift
-//  classmereApp
-//
-//  Created by Rutger Farry on 11/5/15.
-//  Copyright © 2015 Brandon Lee. All rights reserved.
-//
-
 import Foundation
 
 struct DataFormatter {

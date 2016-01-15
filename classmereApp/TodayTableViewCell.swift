@@ -1,11 +1,3 @@
-//
-//  TodayTableViewCell.swift
-//  classmere
-//
-//  Created by Rutger Farry on 10/22/15.
-//  Copyright © 2015 Rutger Farry. All rights reserved.
-//
-
 import UIKit
 
 class TodayTableViewCell: AbstractClassmereCell {

@@ -1,11 +1,3 @@
-//
-//  InfoTableViewCell2.swift
-//  classmereApp
-//
-//  Created by Brandon Lee on 11/14/15.
-//  Copyright © 2015 Brandon Lee. All rights reserved.
-//
-
 import UIKit
 
 class InfoTableViewCell2: AbstractClassmereCell {

@@ -1,11 +1,3 @@
-//
-//  DetailViewController.swift
-//  classmere
-//
-//  Created by Rutger Farry on 10/21/15.
-//  Copyright © 2015 Rutger Farry. All rights reserved.
-//
-
 import UIKit
 
 class DetailViewController: UITableViewController {
