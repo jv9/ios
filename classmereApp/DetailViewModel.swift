@@ -7,8 +7,7 @@ class DetailViewModel {
     init(course: Course) {
         self.course = course
     }
-        
-    
+
     func fetchBuildingDataForSections(sections: [CourseSection], completed: () -> Void) {
         var buildingsFetched = 0
         for section in sections {

@@ -1,5 +1,4 @@
 import UIKit
-import Alamofire
 import SwiftyJSON
 
 class CourseViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
