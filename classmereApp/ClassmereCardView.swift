@@ -54,7 +54,34 @@ final class ClassmereCardView: UIView {
         cardStackView.leftAnchor.constraintEqualToAnchor(leftAnchor).active = true
     }
     
-    func addClassmereLabel(label: ClassmereCardLabel) {
-        
+    func navigateToAddress(address: String) {
+        mapView?.centerMapOnAddress()
     }
+    
+    func addHeadingWithText(text: String) {
+        let heading = ClassmereCardLabel(
+            text: text,
+            style: .Heading)
+        cardStackView.addArrangedSubview(heading)
+    }
+    
+    func addLabelWithText(text: String, image: UIImage) {
+        let label = ClassmereCardLabel(
+            icon: image,
+            text: text,
+            style: .Body)
+        cardStackView.addArrangedSubview(label)
+    }
+    
+    func removeLabels() {
+        for subview in cardStackView.arrangedSubviews {
+            cardStackView.removeArrangedSubview(subview)
+        }
+    }
+}
+
+protocol ClassmereCardViewProtocol {
+    func navigateToAddress(address: String)
+    func addHeadingWithText(text: String)
+    func addLabelWithText(text: String, image: UIImage)
 }
