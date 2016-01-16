@@ -17,15 +17,10 @@ final class ClassmereCardView: UIView {
         }
         
         if withMap {
-            let mapView = ClassmereMapView()
-            self.addSubview(mapView)
-            mapView.topAnchor.constraintEqualToAnchor(self.topAnchor).active = true
-            mapView.heightAnchor.constraintEqualToConstant(280.0).active = true
-            mapView.leftAnchor.constraintEqualToAnchor(self.leftAnchor).active = true
-            mapView.rightAnchor.constraintEqualToAnchor(self.rightAnchor).active = true
-            self.mapView = mapView
+            mapView = ClassmereMapView()
         }
     }
+    
     required init?(coder aDecoder: NSCoder) {
         mapView = nil
         super.init(coder: aDecoder)
@@ -37,13 +32,25 @@ final class ClassmereCardView: UIView {
     }
     
     override func layoutSubviews() {
+        if let mapView = mapView {
+            addSubview(mapView)
+            mapView.topAnchor.constraintEqualToAnchor(self.topAnchor).active = true
+            mapView.heightAnchor.constraintEqualToConstant(280.0).active = true
+            mapView.leftAnchor.constraintEqualToAnchor(self.leftAnchor).active = true
+            mapView.rightAnchor.constraintEqualToAnchor(self.rightAnchor).active = true
+        }
+        
         addSubview(cardStackView)
         cardStackView.translatesAutoresizingMaskIntoConstraints = false
+        cardStackView.axis = .Vertical
+        cardStackView.alignment = .Fill
+        cardStackView.distribution = .Fill
+        cardStackView.spacing = 8.0
+        cardStackView.baselineRelativeArrangement = true
         
-        let cardStackViewTopAnchor = mapView?.topAnchor ?? topAnchor
+        let cardStackViewTopAnchor = mapView?.bottomAnchor ?? topAnchor
         cardStackView.topAnchor.constraintEqualToAnchor(cardStackViewTopAnchor).active = true
         cardStackView.rightAnchor.constraintEqualToAnchor(rightAnchor).active = true
-        cardStackView.bottomAnchor.constraintEqualToAnchor(bottomAnchor).active = true
         cardStackView.leftAnchor.constraintEqualToAnchor(leftAnchor).active = true
     }
     
