@@ -113,4 +113,13 @@ class CourseViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBAction func exitButtonPressed(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
     }
+    
+    @IBAction func addButtonPressed(sender: AnyObject) {
+        let courseSubjectCodeString: String = course!.subjectCode!
+        let courseNumberInt: Int = course!.courseNumber!
+        APIService.sendCourseCloud(courseSubjectCodeString, courseNumber: courseNumberInt) {_ in
+        
+        }
+    }
+
 }

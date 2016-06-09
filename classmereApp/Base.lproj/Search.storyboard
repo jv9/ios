@@ -257,14 +257,22 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="Title" id="Fk3-6U-kkE">
-                        <barButtonItem key="leftBarButtonItem" systemItem="stop" id="YgU-eY-9Z7">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Title" id="JJ2-aq-pN1">
+                        <barButtonItem key="leftBarButtonItem" systemItem="stop" id="RWg-V3-AbM">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
-                                <action selector="exitButtonPressed:" destination="hEf-gV-jam" id="VXE-dj-RYv"/>
+                                <action selector="exitButtonPressed:" destination="hEf-gV-jam" id="LUC-p5-tAh"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Add" id="KLe-cT-wM2">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="addButtonPressed:" destination="hEf-gV-jam" id="sDV-45-hxj"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="creditsLabel" destination="48m-a9-IUM" id="u4l-Ws-aum"/>
                         <outlet property="descriptionLabel" destination="I40-E1-lwI" id="YC3-ay-xpP"/>

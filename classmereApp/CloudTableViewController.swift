@@ -101,5 +101,8 @@ class CloudTableViewController: UIViewController, UITableViewDelegate, UITableVi
         cell.contentView.backgroundColor = cellColors[indexPath.section]
         return cell
     }
-
+    
+    @IBAction func exitButtonPressed(sender: AnyObject) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
 }
