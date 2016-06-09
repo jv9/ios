@@ -68,6 +68,7 @@ class TodayTableViewController: UIViewController, UITableViewDelegate, UITableVi
                 
                 // FIXME: A little bit sloppy here - since don't really need second parameter.
                 controller.detailViewModel = DetailViewModel(course: course, courseSection: course.courseSections[0])
+                print(course)
                 controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
                 controller.navigationItem.leftItemsSupplementBackButton = true
             }
@@ -113,5 +114,4 @@ class TodayTableViewController: UIViewController, UITableViewDelegate, UITableVi
             cell.contentView.backgroundColor = cellColors[indexPath.section]
             return cell
     }
-
 }
