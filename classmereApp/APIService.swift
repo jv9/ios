@@ -16,7 +16,20 @@ import SwiftyJSON
  */
 struct APIService {
 
-    static let baseURL = "http://api.classmere.com"
+//    static let baseURL = "http://api.classmere.com"
+    static let baseURL = "http://104.236.187.221"
+    
+    /**
+     Prints out alert message when a network error occurs
+     
+     - Parameter theError: An error message to print out
+    */
+    static func showAlert(theError: NSError) {
+        let alertController = UIAlertController(title: "Network Error", message: "Request failed with error: \(theError)", preferredStyle: .Alert)
+        let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+        alertController.addAction(defaultAction)
+        UIApplication.sharedApplication().keyWindow?.rootViewController?.presentViewController(alertController, animated: true, completion: nil)
+    }
     
     /**
     Fetches all courses at OSU in a single request.
@@ -33,6 +46,7 @@ struct APIService {
                     completion(JSON(data))
                 case .Failure(let error):
                     print("Request failed with error: \(error)")
+                    showAlert(error)
                 }
                 UIApplication.sharedApplication().networkActivityIndicatorVisible = false
         }
@@ -56,6 +70,7 @@ struct APIService {
                         completion(JSON(data))
                     case .Failure(let error):
                         print("Request failed with error: \(error)")
+                        showAlert(error)
                     }
                     UIApplication.sharedApplication().networkActivityIndicatorVisible = false
             }
@@ -78,6 +93,7 @@ struct APIService {
                         completion(JSON(data))
                     case .Failure(let error):
                         print("Request failed with error: \(error)")
+                        showAlert(error)
                     }
                     UIApplication.sharedApplication().networkActivityIndicatorVisible = false
             }
@@ -108,6 +124,7 @@ struct APIService {
                         }
                     case .Failure(let error):
                         print("Request failed with error: \(error)")
+                        showAlert(error)
                         completion(nil)
                     }
                     UIApplication.sharedApplication().networkActivityIndicatorVisible = false
