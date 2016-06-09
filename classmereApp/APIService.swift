@@ -16,16 +16,19 @@ import SwiftyJSON
  */
 struct APIService {
 
-//    static let baseURL = "http://api.classmere.com"
+    // static let baseURL = "http://api.classmere.com"
+    // Original Server
     static let baseURL = "http://104.236.187.221"
+    static let cloudPushURL = "http://159.203.253.52:3000/push"
+    static let cloudPullURL = "http://159.203.253.52:3000/pull"
     
     /**
-     Prints out alert message when a network error occurs
+     Prints out alert message when a network event occurs
      
-     - Parameter theError: An error message to print out
+     - Parameter message: A message to print out
     */
-    static func showAlert(theError: NSError) {
-        let alertController = UIAlertController(title: "Network Error", message: "Request failed with error: \(theError)", preferredStyle: .Alert)
+    static func showAlert(message: String) {
+        let alertController = UIAlertController(title: "Alert", message: message, preferredStyle: .Alert)
         let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
         alertController.addAction(defaultAction)
         UIApplication.sharedApplication().keyWindow?.rootViewController?.presentViewController(alertController, animated: true, completion: nil)
@@ -46,7 +49,7 @@ struct APIService {
                     completion(JSON(data))
                 case .Failure(let error):
                     print("Request failed with error: \(error)")
-                    showAlert(error)
+                    showAlert("Network Error - The internet connection appears to be offline.")
                 }
                 UIApplication.sharedApplication().networkActivityIndicatorVisible = false
         }
@@ -70,7 +73,7 @@ struct APIService {
                         completion(JSON(data))
                     case .Failure(let error):
                         print("Request failed with error: \(error)")
-                        showAlert(error)
+                        showAlert("Network Error - The internet connection appears to be offline.")
                     }
                     UIApplication.sharedApplication().networkActivityIndicatorVisible = false
             }
@@ -93,7 +96,7 @@ struct APIService {
                         completion(JSON(data))
                     case .Failure(let error):
                         print("Request failed with error: \(error)")
-                        showAlert(error)
+                        showAlert("Network Error - The internet connection appears to be offline.")
                     }
                     UIApplication.sharedApplication().networkActivityIndicatorVisible = false
             }
@@ -124,10 +127,48 @@ struct APIService {
                         }
                     case .Failure(let error):
                         print("Request failed with error: \(error)")
-                        showAlert(error)
+                        showAlert("Network Error - The internet connection appears to be offline.")
                         completion(nil)
                     }
                     UIApplication.sharedApplication().networkActivityIndicatorVisible = false
             }
+    }
+    
+    static func getCourseCloud(completion: (JSON) -> Void) -> Request {
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+        return Alamofire.request(.GET, cloudPullURL)
+            .responseJSON { response in
+                switch response.result {
+                case .Success(let data):
+                    completion(JSON(data))
+                case .Failure(let error):
+                    print("Request failed with error: \(error)")
+                    showAlert("Network Error - The internet connection appears to be bad.")
+                }
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+        }
+    }
+    
+    static func sendCourseCloud(courseSubjectCode: String, courseNumber: Int, completion: (JSON) -> Void) -> Request {
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+        let newCourse = ["subjectCode": courseSubjectCode, "courseNumber": courseNumber]
+        return Alamofire.request(.POST, cloudPushURL, parameters: (newCourse as! [String : AnyObject]), encoding: .JSON)
+            .responseJSON { response in
+                switch response.result {
+                case .Success(let data):
+                    if response.response?.statusCode !== 200 {
+                        showAlert("Error - Status Code: \(response.response!.statusCode)")
+                        completion(nil)
+                    } else {
+                        showAlert("Success - Status Code: \(response.response!.statusCode)")
+                        completion(JSON(data))
+                    }
+                case .Failure(let error):
+                    print("Request failed with error: \(error)")
+                    showAlert("Network Failure!")
+                }
+                
+                UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+        }
     }
 }

@@ -14,7 +14,7 @@ import UIKit
 class DetailViewController: UITableViewController {
 
     var detailViewModel: DetailViewModel!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -82,4 +82,13 @@ class DetailViewController: UITableViewController {
                 fatalError("Tableview shouldn't contain more than 2 cells")
             }
         }
+    
+    @IBAction func addButtonPressed(sender: AnyObject) {
+        let courseSubjectCodeString: String = detailViewModel.course.subjectCode!
+        let courseNumberInt: Int = detailViewModel.course.courseNumber!
+        print(detailViewModel.course.abbr!)
+        APIService.sendCourseCloud(courseSubjectCodeString, courseNumber: courseNumberInt) {_ in
+            
+        }
+    }
 }
